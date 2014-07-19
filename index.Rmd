@@ -1,0 +1,76 @@
+---
+title       : Interesting Facts about Iris
+subtitle    : My Shiny App - a coursera data product project
+author      : wx-chen
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : solarized_light      # 
+widgets     : [bootstrap, quiz, shiny, interactive]  
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+ext_widgets: {rCharts: [libraries/nvd3]}
+---
+
+## Overview  
+  
+  
+### The App: Interesting Facts about Iris:  
+
+* Use the "iris" dataset  
+* Provide interactive control of plotted data, and whether to display images of iris flowers  
+* Here is the first few lines of the "iris" dataset:
+
+```{r}
+library(datasets)
+head(iris)
+```
+
+--- .class #id 
+
+## Reshape data into a clean format  
+
+* The dataset is melted so that each row contains observations for 1 part (Petal or Sepal)  
+```{r, echo=FALSE}
+require(dplyr) # use the "dplyr" package
+datas <- iris %>%
+        select(Sepal.Length,Sepal.Width,Species) %>%
+        mutate(Length=Sepal.Length, Width=Sepal.Width, Part="Sepal") %>%
+        select(Length, Width, Part, Species)
+datap <- iris %>%
+        select(Petal.Length,Petal.Width,Species) %>%
+        mutate(Length=Petal.Length, Width=Petal.Width, Part="Petal") %>%
+        select(Length, Width, Part, Species)
+irisdata <- rbind(datas,datap)
+```
+```{r}
+head(irisdata,3)
+tail(irisdata,3)
+```
+
+---
+
+## Use the dropdown menu to control plot
+* You can choose if you want to see the dimension plots of one iris species, or all three together  
+* e.g. choose to see all three species, plot will be like:  
+```{r, echo=FALSE,results='asis'}
+require(ggplot2)
+g <- ggplot(irisdata,aes(Width, Length))
+g + geom_point(aes(color=Species)) + facet_grid(.~Part)
+```
+
+---
+
+## Use the Checkbox to display images
+* You can choose to display the images of the iris by using the checkbox  
+* e.g. if selected this image will be displayed:  
+
+![alt text][1]  
+
+### For more information, go to the app [here](https://chenwx.shinyapps.io/IrisDisplay/)  
+
+
+[1]: I:/R/IrisSlidify/setose.png "Iris Species"  
+
+
+
