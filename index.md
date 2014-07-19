@@ -79,12 +79,10 @@ tail(irisdata,3)
 * You can choose to display the images of the iris by using the checkbox  
 * e.g. if selected this image will be displayed:  
 
-![alt text][1]  
+![IrisImage](https://raw.githubusercontent.com/wx-chen/wx-chen.github.io/master/setose.png) 
 
 ### For more information, go to the app [here](https://chenwx.shinyapps.io/IrisDisplay/)  
 
-
-[1]: I:/R/IrisSlidify/setose.png "Iris Species"  
 
 
 
